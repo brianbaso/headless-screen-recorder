@@ -1,12 +1,16 @@
-# headless-screen-recorder
+<div align="center">
+  <img src="./assets/logo.png" alt="headless-screen-recorder logo" width="200"/>
+  
+  # headless-screen-recorder
 
-A Puppeteer plugin optimized for headless Chrome using the modern `HeadlessExperimental.beginFrame` API for reliable video capture with professional color correction.
+  A Puppeteer plugin optimized for headless Chrome using the modern `HeadlessExperimental.beginFrame` API for reliable video capture with professional color correction.
 
-[![NPM](https://nodei.co/npm/headless-screen-recorder.png)](https://npmjs.org/package/headless-screen-recorder)
+  [![NPM](https://nodei.co/npm/headless-screen-recorder.png)](https://npmjs.org/package/headless-screen-recorder)
 
-![GitHub](https://img.shields.io/github/license/brianbaso/headless-screen-recorder)
-![GitHub package.json version](https://img.shields.io/github/package-json/v/brianbaso/headless-screen-recorder)
-![npm](https://img.shields.io/npm/dt/headless-screen-recorder)
+  ![GitHub](https://img.shields.io/github/license/brianbaso/headless-screen-recorder)
+  ![GitHub package.json version](https://img.shields.io/github/package-json/v/brianbaso/headless-screen-recorder)
+  ![npm](https://img.shields.io/npm/dt/headless-screen-recorder)
+</div>
 
 ## Key Features
 
