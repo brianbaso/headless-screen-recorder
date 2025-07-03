@@ -1,38 +1,16 @@
 {
-  "name": "puppeteer-screen-recorder",
-  "version": "3.0.6",
-  "description": "A puppeteer Plugin that uses the native chrome devtool protocol for capturing video frame by frame. Also supports an option to follow pages that are opened by the current page object",
+  "name": "headless-screen-recorder",
+  "version": "1.0.0",
+  "description": "A Puppeteer plugin optimized for headless Chrome using HeadlessExperimental.beginFrame API for reliable video capture with proper color correction",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
-  "repository": "https://github.com/prasanaworld/puppeteer-screen-recorder",
+  "repository": "https://github.com/brianbaso/headless-screen-recorder",
   "author": {
-    "name": "Prasana Kannan",
-    "url": "https://www.linkedin.com/in/prasanakannan/",
-    "email": "prasanaworld@gmail.com"
+    "name": "Brian Baso, Nate Ryan, Jill Webber",
+    "url": "https://github.com/brianbaso/headless-screen-recorder"
   },
-  "sponsor": {
-    "url": "https://opencollective.com/puppeteer-screen-recorder"
-  },
-  "funding": [
-    {
-      "type": "individual",
-      "url": "https://github.com/sponsors/prasanaworld/dashboard/tiers?frequency=one-time"
-    },
-    {
-      "type": "individual",
-      "url": "https://opencollective.com/puppeteer-screen-recorder"
-    },
-    {
-      "type": "corporate",
-      "url": "https://github.com/sponsors/prasanaworld/dashboard/tiers"
-    },
-    {
-      "type": "corporate",
-      "url": "https://opencollective.com/puppeteer-screen-recorder"
-    }
-  ],
-  "homepage": "https://prasanaworld.github.io/puppeteer-screen-recorder/",
+  "homepage": "https://github.com/brianbaso/headless-screen-recorder",
   "license": "MIT",
   "keywords": [
     "puppeteer",

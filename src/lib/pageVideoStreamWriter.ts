@@ -130,7 +130,9 @@ export default class PageVideoStreamWriter extends EventEmitter {
 
       outputStream
         .on('error', (e) => {
-          this.handleWriteStreamError(e.message);
+          const errorMessage = e.stderr || e.message;
+          console.error('FFmpeg error:', errorMessage);
+          this.handleWriteStreamError(errorMessage);
           resolve(false);
         })
         .on('stderr', (e) => {
@@ -155,6 +157,8 @@ export default class PageVideoStreamWriter extends EventEmitter {
 
       outputStream
         .on('error', (e) => {
+          const errorMessage = e.stderr || e.message;
+          console.error('FFmpeg error:', errorMessage);
           writableStream.emit('error', e);
           resolve(false);
         })
@@ -217,7 +221,14 @@ export default class PageVideoStreamWriter extends EventEmitter {
       .autopad(this.autopad.activation, this.autopad?.color)
       .inputFormat('image2pipe')
       .inputFPS(this.options.fps)
+      .videoFilters('scale=in_range=pc:in_color_matrix=bt601:out_range=tv:out_color_matrix=bt709')
       .outputOptions(this.getOutputOption())
+      .outputOptions([
+        '-colorspace', 'bt709',
+        '-color_range', 'tv',
+        '-color_primaries', 'bt709',
+        '-color_trc', 'bt709'
+      ])
       .on('progress', (progressDetails) => {
         this.duration = progressDetails.timemark;
       });
