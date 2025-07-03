@@ -16,7 +16,7 @@
 
 - 🎯 **Optimized for Headless Chrome** - Built specifically for headless environments using modern Chrome DevTools Protocol
 - 🎨 **Professional Color Correction** - Automatic color space conversion from BT.601 to BT.709 for broadcast-standard output
-- ⚡ **Reliable Frame Capture** - Uses `HeadlessExperimental.beginFrame` API instead of deprecated `Page.screencastFrame`
+- ⚡ **Reliable Frame Capture** - Uses `HeadlessExperimental.beginFrame` API instead of `Page.startScreencast`
 - 🔧 **Simplified Architecture** - No complex session management, popup handling, or tab following overhead
 - 📹 **High-Quality Output** - Supports MP4, AVI, MOV, and WebM formats with configurable quality settings
 
@@ -103,7 +103,7 @@ Stop the recording and save the video.
 
 This fork addresses several critical issues with the original package:
 
-1. **Modern CDP API**: Uses `HeadlessExperimental.beginFrame` instead of the deprecated `Page.screencastFrame`
+1. **Modern CDP API**: Uses `HeadlessExperimental.beginFrame` instead of `Page.startScreencast`
 2. **Color Accuracy**: Automatic color space conversion ensures videos look correct without post-processing
 3. **Simplified Code**: Removed complex session management, making it more reliable and easier to maintain
 4. **Headless Optimized**: Specifically designed for headless Chrome environments
