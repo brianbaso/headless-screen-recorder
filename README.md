@@ -1,271 +1,191 @@
-# <img alt="puppeteer screen recorder logo" width="128px" src="https://github.com/prasanaworld/puppeteer-screen-recorder/blob/main/asserts/puppeteer-screen-recorder.png" /> puppeteer-screen-recorder
+<div align="center">
+  <img src="https://raw.githubusercontent.com/brianbaso/headless-screen-recorder/main/assets/logo.png" alt="headless-screen-recorder logo" width="200"/>
+  
+  # headless-screen-recorder
 
-A puppeteer Plugin that uses the native [chrome devtool protocol](https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-startScreencast) for capturing video frame by frame. Also supports an option to follow pages that are opened by the current page object.
-[Check out API Docs](https://prasanaworld.github.io/puppeteer-screen-recorder/classes/puppeteerscreenrecorder.html).
+  A Puppeteer plugin optimized for headless Chrome using the modern `HeadlessExperimental.beginFrame` API for reliable video capture with professional color correction.
 
-![Website](https://img.shields.io/website?url=https%3A%2F%2Fprasanaworld.github.io%2Fpuppeteer-screen-recorder%2Fclasses%2Fpuppeteerscreenrecorder.html&style=plastic&logo=website&label=Documentation) ![Discord](https://img.shields.io/discord/1246821801120632902?style=plastic&logo=discord&label=Join%20Our%20Discord%20Server&link=https%3A%2F%2Fdiscord.com%2Fchannels%2F1246821801120632902%2F1246821801120632905)
+  [![NPM](https://nodei.co/npm/headless-screen-recorder.png)](https://npmjs.org/package/headless-screen-recorder)
 
-[![NPM](https://nodei.co/npm/puppeteer-screen-recorder.png)](https://npmjs.org/package/puppeteer-screen-recorder)
+  ![GitHub](https://img.shields.io/github/license/brianbaso/headless-screen-recorder)
+  ![GitHub package.json version](https://img.shields.io/github/package-json/v/brianbaso/headless-screen-recorder)
+  ![npm](https://img.shields.io/npm/dt/headless-screen-recorder)
+</div>
 
-![GitHub](https://img.shields.io/github/license/prasanaworld/puppeteer-screen-recorder) ![GitHub Sponsors](https://img.shields.io/github/sponsors/prasanaworld?label=Github%20Sponsours) ![Open Collective backers and sponsors](https://img.shields.io/opencollective/all/puppeteer-screen-recorder?label=Open%20Collective%20sponsors)
+## Key Features
 
-![GitHub package.json version](https://img.shields.io/github/package-json/v/prasanaworld/puppeteer-screen-recorder) ![GitHub top language](https://img.shields.io/github/languages/top/prasanaworld/puppeteer-screen-recorder) ![npm](https://img.shields.io/npm/dt/puppeteer-screen-recorder) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/prasanaworld/puppeteer-screen-recorder/ci.yml)
+- 🎯 **Optimized for Headless Chrome** - Built specifically for headless environments using modern Chrome DevTools Protocol
+- 🎨 **Professional Color Correction** - Automatic color space conversion from BT.601 to BT.709 for broadcast-standard output
+- ⚡ **Reliable Frame Capture** - Uses `HeadlessExperimental.beginFrame` API instead of deprecated `Page.screencastFrame`
+- 🔧 **Simplified Architecture** - No complex session management, popup handling, or tab following overhead
+- 📹 **High-Quality Output** - Supports MP4, AVI, MOV, and WebM formats with configurable quality settings
 
-![GitHub forks](https://img.shields.io/github/forks/prasanaworld/puppeteer-screen-recorder?style=social) ![GitHub Repo stars](https://img.shields.io/github/stars/prasanaworld/puppeteer-screen-recorder?style=social) ![GitHub watchers](https://img.shields.io/github/watchers/prasanaworld/puppeteer-screen-recorder?style=social) ![Twitter Follow](https://img.shields.io/twitter/follow/prasanaworld?style=social)
+## Installation
 
-<a href="https://github.com/prasanaworld/puppeteer-screen-recorder/issues/new">Add Feature Request</a>
-
-</p>
-
-## Recording video/audio from video conferencing calls
-
-If you’re looking to use this repo to retrieve video or audio streams from meeting platforms like Zoom, Google Meet, Microsoft Teams, consider checking out [Recall.ai](https://www.recall.ai/?utm_source=github&utm_medium=sponsorship&utm_campaign=puppeteer-screen-recorder), an API for meeting recording.
-
-## Be a Sponsor
-
-Puppeteer-screen-recorder isn't backed by a company, so the future of this project depends on you. Become a sponsor or a backer - help the open source community.
-
-#### **For Companies and Businesses**
-
-By becoming a Github Sponsor, your company and brand will be recognized as a one that gives back to the open source tools that run your business and one that respects your developers time and your customers' experience. For more details contact [Author - Prasana Kannan](prasanaworld@gmail.com)
-
-#### **For Developers**
-
-By helping your company become a Github Sponsor, you will not only feel great about giving back to the open source tools that run your business run, If you believe your company could become a sponsor, then please reach out!
-
-- [open-collective](https://opencollective.com/puppeteer-screen-recorder)
-- [Paypal](https://paypal.me/prasanaworld)
-- [Bitcoin - 3NdGW6wKVFgxa1X5XxRDNHqMWAhGNSrA5A](3NdGW6wKVFgxa1X5XxRDNHqMWAhGNSrA5A)
-
-## Getting Started
-
-### How to use 
-![How to use](https://raw.githubusercontent.com/prasanaworld/puppeteer-screen-recorder/main/asserts/video_demo.gif)
-
-### Installation Guide
-
-Using Npm
-
+Using npm:
 ```sh
-npm install puppeteer-screen-recorder
+npm install headless-screen-recorder
 ```
 
-Using Yarn
-
+Using yarn:
 ```sh
-yarn add puppeteer-screen-recorder
+yarn add headless-screen-recorder
 ```
 
-### API Description
-
-**1. Import the plugin using ES6 or commonjs.**
+## Quick Start
 
 ```javascript
-// ES6
-import { PuppeteerScreenRecorder } from 'puppeteer-screen-recorder';
-
-// or commonjs
-const { PuppeteerScreenRecorder } = require('puppeteer-screen-recorder');
-```
-
-**2. Setup the Configuration object.**
-
-```javascript
-const Config = {
-  followNewTab: true,
-  fps: 25,
-  ffmpeg_Path: '<path of ffmpeg_path>' || null,
-  videoFrame: {
-    width: 1024,
-    height: 768,
-  },
-  videoCrf: 18,
-  videoCodec: 'libx264',
-  videoPreset: 'ultrafast',
-  videoBitrate: 1000,
-  autopad: {
-    color: 'black' | '#35A5FF',
-  },
-  aspectRatio: '4:3',
-};
-```
-
-> - **followNewTab** : Boolean value which is indicate whether to follow the tab or not. Default value is true.
-
-> - **fps**: Numeric value which denotes no.of Frames per second in which the video should be recorded. default value is 25.
-
-> - **ffmpeg_Path**: String value pointing to the installation of [FFMPEG](https://ffmpeg.org/). Default is null (Automatically install the FFMPEG and use it).
-
-> - **videoFrame**: An object which is to specify the width and height of the capturing video frame. Default to browser viewport size.
-
-> - **aspectRatio**: Specify the aspect ratio of the video. Default value is `4:3`.
-
-> - **autopad**: Specify whether autopad option is used and its color. Default to autopad deactivation mode.
-
-> - **recordDurationLimit**: Numerical value specify duration (in seconds) to record the video. By default video is recorded till stop method is invoked`. (Note: It's mandatory to invoke Stop() method even if this value is set)
-
-**3. create a new instance of video recording**
-
-```javascript
-const recorder = new PuppeteerScreenRecorder(page, Config); // Config is optional
-
-// or
-
-const recorder = new PuppeteerScreenRecorder(page);
-```
-
-> - **page**: Puppeteer page object which needs to captured.
-> - **config**: Config is an optional object.
->   Default value is `{ followNewTab: true, fps: 25, ffmpeg_Path: null }`
-
-**4. Start Video capturing**
-
-**Option 1 - Start video capturing and save as file**
-
-```javascript
-const SavePath = './test/demo.mp4';
-await recorder.start(savePath);
-```
-
-**Option 2 - Start Video capturing using stream**
-
-```javascript
-const pipeStream = new PassThrough();
-await recorder.startStream(pipeStream);
-```
-
-> **pass**: Any writeable stream that will be an output for the stream recorder. Video is recorded and streamed with .mp4 extension.
-
-> **savePath**: string value indicating the directory on where to save the video. The path must also specify the name of the video with extension .mp4 (example - ./test/puppeteer-demo.mp4). Starting from v2, support added for extensions mp4, avi, mov and webm.
-
-**5. Stop the video capturing.**
-
-```javascript
-await recorder.stop();
-```
-
-### Example
-
-```javascript
+const { PuppeteerScreenRecorder } = require('headless-screen-recorder');
 const puppeteer = require('puppeteer');
-const { PuppeteerScreenRecorder } = require('puppeteer-screen-recorder');
 
 (async () => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
-  const recorder = new PuppeteerScreenRecorder(page);
-  await recorder.start('./report/video/simple.mp4'); // supports extension - mp4, avi, webm and mov
+  
+  const recorder = new PuppeteerScreenRecorder(page, {
+    fps: 25,
+    ffmpeg_Path: '<path to ffmpeg>',
+    videoFrame: {
+      width: 1920,
+      height: 1080,
+    },
+    aspectRatio: '16:9',
+  });
+  
+  await recorder.start('./output.mp4');
   await page.goto('https://example.com');
-
-  await page.goto('https://test.com');
+  
+  // Perform actions...
+  
   await recorder.stop();
   await browser.close();
 })();
 ```
 
-## Key Feature
+## API Documentation
 
-### 1. Follow Page Automatically
+### Constructor Options
 
-Automatically follows pages (multiple pages) which are opened at runtime, which will be part of video capturing. Also support options to disable the default flow.
+```typescript
+interface PuppeteerScreenRecorderOptions {
+  fps?: number;                    // Frames per second (default: 25)
+  quality?: number;                // Video quality 0-100 (default: 80)
+  ffmpeg_Path?: string;            // Path to FFmpeg executable
+  videoFrame?: {                   // Video dimensions
+    width: number;
+    height: number;
+  };
+  aspectRatio?: string;            // Video aspect ratio (default: '4:3')
+  recordDurationLimit?: number;    // Maximum recording duration
+  videoCrf?: number;               // Constant Rate Factor (default: 23)
+  videoCodec?: string;             // Video codec (default: 'libx264')
+  videoPreset?: string;            // Encoding preset (default: 'ultrafast')
+  videoBitrate?: number;           // Video bitrate in kbps (default: 1000)
+  autopad?: {                      // Auto-padding options
+    activation: boolean;
+    color?: string;
+  };
+  format?: 'jpeg' | 'png';         // Screenshot format (default: 'jpeg')
+}
+```
 
-### 2. No overhead over FF_MPEG library
+### Methods
 
-FFMPEG library's installation and configuration are automatically managed by the library internally. Also offers options to configure with custom library path.
+#### `start(savePath: string): Promise<void>`
+Start recording to a file.
 
-### 3. Native Implementation
+#### `stop(): Promise<void>`
+Stop the recording and save the video.
 
-This plugin works directly with native [chrome devtool protocol](https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-startScreencast) to capture the video under the wood without any other thirdparty puppeteer plugins for screen capturing.
+## What Makes This Different?
 
-### 4. Adopted the Chromium principles
+### From puppeteer-screen-recorder
 
-Adopted Chromium principles such as Speed, Security, Stability and Simplicity. It also ensures no frames are missed during video capturing and doesn't impact the performance, since its doesn't use any other puppeteer plugin internally.
+This fork addresses several critical issues with the original package:
 
-### 5. Supports multiple video format and stream
+1. **Modern CDP API**: Uses `HeadlessExperimental.beginFrame` instead of the deprecated `Page.screencastFrame`
+2. **Color Accuracy**: Automatic color space conversion ensures videos look correct without post-processing
+3. **Simplified Code**: Removed complex session management, making it more reliable and easier to maintain
+4. **Headless Optimized**: Specifically designed for headless Chrome environments
 
-Supports multiple video format like AVI, MP4, MOV and WEBM. Enable support for writable or duplex stream for process the output streaming .
+### Technical Improvements
 
+- **Color Correction**: Converts from PC range BT.601 (computer graphics) to TV range BT.709 (broadcast standard)
+- **Reliable Capture**: Simple interval-based polling instead of complex event-driven architecture
+- **Better Error Handling**: Enhanced FFmpeg error logging for easier debugging
 
-## FAQ
+## Migration Guide
 
-Some of the frequently asked question about puppeteer screen recording are
+If you're migrating from `puppeteer-screen-recorder`:
 
-**Q: Does it support Chrome in headless mode?**
+```javascript
+// Before
+const { PuppeteerScreenRecorder } = require('puppeteer-screen-recorder');
 
----
+// After
+const { PuppeteerScreenRecorder } = require('headless-screen-recorder');
+```
 
-Yes, it supports Both headless and headFul mode.
+The API remains fully compatible, so no other code changes are needed.
 
-It records full length video, frame by frame even when Chrome runs in headless mode.
+## Requirements
 
-**Q: Does it support multiple extension?**
+- Node.js >= 16
+- Puppeteer >= 19.0.0
+- FFmpeg (system installation or via `@ffmpeg-installer/ffmpeg`)
+- Chrome/Chromium with HeadlessExperimental API support
 
----
+## Examples
 
-Yes, Starting from version 2.0, support multiple extension like AVI, MP4, MOV and WEBM.
+### Basic Recording
+```javascript
+const recorder = new PuppeteerScreenRecorder(page);
+await recorder.start('./video.mp4');
+// ... perform actions
+await recorder.stop();
+```
 
-**Q: Does it use the window object?**
+### High-Quality Recording
+```javascript
+const recorder = new PuppeteerScreenRecorder(page, {
+  fps: 30,
+  quality: 100,
+  videoFrame: {
+    width: 1920,
+    height: 1080,
+  },
+  videoCrf: 18,  // Lower = better quality
+  videoPreset: 'slow',  // Slower = better compression
+});
+```
 
----
+### Streaming to a Writable Stream
+```javascript
+const { createWriteStream } = require('fs');
+const writableStream = createWriteStream('./output.mp4');
+const recorder = new PuppeteerScreenRecorder(page);
+await recorder.start(writableStream);
+```
 
-No, it's not tied to the window Object.
+## Troubleshooting
 
-**Q: Does it follows pages which are opened at runtime**
+### FFmpeg Not Found
+If you get an FFmpeg error, either:
+1. Install FFmpeg on your system
+2. Use the npm package: `npm install @ffmpeg-installer/ffmpeg`
+3. Specify the path: `ffmpeg_Path: '/path/to/ffmpeg'`
 
----
+### Color Issues
+The color correction is applied automatically. If you need different color settings, you can modify the video output options in your configuration.
 
-Yes, it automatically follows pages which is created at runtime.
+## Contributing
 
-**Q: is there an option to disable video recording for new page created and record video only for the page object passed**
+Issues and pull requests are welcome at [https://github.com/brianbaso/headless-screen-recorder](https://github.com/brianbaso/headless-screen-recorder)
 
----
+## License
 
-Yes, By setting the `options.followNewTab` to false, it record only video for the passed page object alone.
+MIT License - see the [LICENSE](LICENSE) file for details.
 
-**Q: Does it support to record video at 60 fps**
+## Credits
 
----
-
-Yes, video can be recorded at 60 fps. By setting `options.fps` to 60.
-
-**Q:Does it use the window object?**
-
----
-
-No, it doesn't use the window object.
-
-**Q: Does it use FFMPEG internally?**
-
----
-
-Yes, it uses FFMPEG with optimized options to speed up the video recording using stream from chrome devtool protocol.
-
-**Q: Does it support Webm?**
-
----
-
-Webm format is supported.
-
-**Q: Is it possible to output the stream for further processing/enhancing?**
-
----
-
-Yes. By passing writable stream/duplex stream to `startStream` method.
-
-**Q: Can I limit the time of recording, like to stop after 2 minutes?**
-
----
-
-By specifying the time to record (in seconds) using `option.recordDurationLimit`
-
-**Q: Does it support audio recording?**
-
----
-
-No, it doesn't audio recording.
-
-**Q: Does it support GIF format, any plan to support in fur?**
-
----
-
-No, it wont support GIF. since Gif is considered as a image format.
+This is a fork of [puppeteer-screen-recorder](https://github.com/prasanaworld/puppeteer-screen-recorder) by Prasana Kannan, optimized specifically for headless Chrome environments with modern CDP APIs and professional video output.
