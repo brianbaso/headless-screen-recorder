@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 
-import { Page } from 'puppeteer';
+import { Page, CDPSession } from 'puppeteer';
 
 import { PuppeteerScreenRecorderOptions } from './pageVideoStreamTypes';
 
@@ -12,6 +12,7 @@ export class pageVideoStreamCollector extends EventEmitter {
   private options: PuppeteerScreenRecorderOptions;
   private isStreamingEnded = false;
   private intervalId: NodeJS.Timeout | null = null;
+  private client: CDPSession | null = null;
 
   constructor(page: Page, options: PuppeteerScreenRecorderOptions) {
     super();
@@ -20,17 +21,20 @@ export class pageVideoStreamCollector extends EventEmitter {
   }
 
   public async start(): Promise<void> {
+    // Create CDP session once
+    this.client = await this.page.target().createCDPSession();
+    
     const quality = Number.isNaN(this.options.quality)
       ? 80
       : Math.max(Math.min(this.options.quality, 100), 0);
 
     const captureFrame = async () => {
-      if (this.isStreamingEnded) {
+      if (this.isStreamingEnded || !this.client) {
         return;
       }
 
       try {
-        const result = await this.page.client().send('HeadlessExperimental.beginFrame', {
+        const result = await this.client.send('HeadlessExperimental.beginFrame', {
           screenshot: {
             format: this.options.format || 'jpeg',
             quality: quality,
@@ -66,6 +70,15 @@ export class pageVideoStreamCollector extends EventEmitter {
     if (this.intervalId) {
       clearInterval(this.intervalId);
       this.intervalId = null;
+    }
+
+    if (this.client) {
+      try {
+        await this.client.detach();
+      } catch (e) {
+        console.warn('Error detaching CDP session:', e.message);
+      }
+      this.client = null;
     }
 
     return true;
