@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/logo.png" alt="headless-screen-recorder logo" width="200"/>
+  <img src="https://raw.githubusercontent.com/brianbaso/headless-screen-recorder/main/assets/logo.png" alt="headless-screen-recorder logo" width="200"/>
   
   # headless-screen-recorder
 
