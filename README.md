@@ -101,9 +101,9 @@ Stop the recording and save the video.
 
 ### From puppeteer-screen-recorder
 
-This fork addresses several critical issues with the original package:
+This package is designed for high-quality production screen recordings:
 
-1. **Modern CDP API**: Uses `HeadlessExperimental.beginFrame` instead of `Page.startScreencast`
+1. **Modern CDP API**: Uses `HeadlessExperimental.beginFrame` instead of `Page.startScreencast` to effectively record smooth animations
 2. **Color Accuracy**: Automatic color space conversion ensures videos look correct without post-processing
 3. **Simplified Code**: Removed complex session management, making it more reliable and easier to maintain
 4. **Headless Optimized**: Specifically designed for headless Chrome environments
